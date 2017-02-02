@@ -1,5 +1,3 @@
-'use strict';
-
 const async = require('async');
 const request = require('request');
 const cheerio = require('cheerio');
@@ -425,7 +423,7 @@ exports.postClockwork = (req, res, next) => {
   const message = {
     To: req.body.telephone,
     From: 'Hackathon',
-    Content: 'Hello from the Hackathon Starter'
+    Content: 'Hello from LiveQA'
   };
   clockwork.sendSms(message, (err, responseData) => {
     if (err) { return next(err.errDesc); }
@@ -512,7 +510,7 @@ exports.getPayPal = (req, res, next) => {
       cancel_url: process.env.PAYPAL_CANCEL_URL
     },
     transactions: [{
-      description: 'Hackathon Starter',
+      description: 'LiveQA',
       amount: {
         currency: 'USD',
         total: '1.99'

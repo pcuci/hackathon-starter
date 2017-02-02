@@ -1,12 +1,14 @@
+/* eslint-env mocha */
+
 const mongoose = require('mongoose');
-const {expect} = require('chai');
+const { expect } = require('chai');
 const sinon = require('sinon');
 require('sinon-mongoose');
 
-const User = require('../models/User');
+const User = require('../../models/User');
 
 describe('User Model', () => {
-  it('should create a new user', (done) => {
+  it('create a new user', (done) => {
     const UserMock = sinon.mock(new User({ email: 'test@gmail.com', password: 'root' }));
     const user = UserMock.object;
 
@@ -14,7 +16,7 @@ describe('User Model', () => {
       .expects('save')
       .yields(null);
 
-    user.save(function (err, result) {
+    user.save((err) => {
       UserMock.verify();
       UserMock.restore();
       expect(err).to.be.null;
@@ -22,7 +24,7 @@ describe('User Model', () => {
     });
   });
 
-  it('should return error if user is not created', (done) => {
+  it('return error if user is not created', (done) => {
     const UserMock = sinon.mock(new User({ email: 'test@gmail.com', password: 'root' }));
     const user = UserMock.object;
     const expectedError = {
@@ -42,7 +44,7 @@ describe('User Model', () => {
     });
   });
 
-  it('should not create a user with the unique email', (done) => {
+  it('not create a user with the unique email', (done) => {
     const UserMock = sinon.mock(User({ email: 'test@gmail.com', password: 'root' }));
     const user = UserMock.object;
     const expectedError = {
@@ -64,7 +66,7 @@ describe('User Model', () => {
     });
   });
 
-  it('should find user by email', (done) => {
+  it('find user by email', (done) => {
     const userMock = sinon.mock(User);
     const expectedUser = {
       _id: '5700a128bd97c1341d8fb365',
@@ -84,7 +86,7 @@ describe('User Model', () => {
     })
   });
 
-  it('should remove user by email', (done) => {
+  it('remove user by email', (done) => {
     const userMock = sinon.mock(User);
     const expectedResult = {
       nRemoved: 1

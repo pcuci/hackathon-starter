@@ -1,16 +1,21 @@
 {
   "name": "hackathon-starter",
-  "version": "4.3.0",
-  "description": "A boilerplate for Node.js web applications",
+  "version": "0.0.1",
+  "description": "LiveQA",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sahat/hackathon-starter.git"
+    "url": "https://github.com/pcuci/liveqa.git"
   },
-  "author": "Sahat Yalkabov",
+  "author": "Paul Cuciureanu",
   "license": "MIT",
   "scripts": {
     "start": "node app.js",
-    "test": "mocha --reporter spec"
+    "test": "mocha --watch --recursive test/server",
+    "test-client": "karma start --reporters clear-screen,dots",
+    "cover": "istanbul cover node_modules/mocha/bin/_mocha -- --recursive test/server",
+    "cover-client": "karma start --reporters clear-screen,dots,coverage --single-run",
+    "update-driver": "webdriver-manager update",
+    "test-integration": "protractor"
   },
   "dependencies": {
     "async": "^2.1.2",
@@ -65,7 +70,10 @@
     "chai": "^3.5.0",
     "eslint": "^3.9.1",
     "eslint-config-airbnb-base": "^11.0.0",
+    "eslint-plugin-chai-expect": "1.1.1",
+    "eslint-plugin-chai-friendly": "0.2.0",
     "eslint-plugin-import": "^2.1.0",
+    "eslint-plugin-mocha": "4.8.0",
     "mocha": "^3.1.2",
     "sinon": "^1.17.6",
     "sinon-mongoose": "^1.3.0",
@@ -73,14 +81,22 @@
   },
   "eslintConfig": {
     "extends": "airbnb-base",
+    "plugins": [
+      "mocha",
+      "chai-expect",
+      "chai-friendly"
+    ],
     "rules": {
       "comma-dangle": 0,
+      "mocha/no-exclusive-tests": "error",
       "consistent-return": 0,
       "no-param-reassign": 0,
       "no-underscore-dangle": 0,
       "no-shadow": 0,
       "no-console": 0,
-      "no-plusplus": 0
+      "no-plusplus": 0,
+      "no-unused-expressions": 0,
+      "chai-friendly/no-unused-expressions": 2
     }
   }
 }

@@ -1,5 +1,7 @@
+/* eslint-env mocha */
+
 const request = require('supertest');
-const app = require('../app.js');
+const app = require('../../app.js');
 
 describe('GET /', () => {
   it('should return 200 OK', (done) => {
